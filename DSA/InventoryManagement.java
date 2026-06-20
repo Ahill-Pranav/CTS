@@ -1,4 +1,4 @@
-package InventoryManagement;
+package DSA;
 
 import java.util.*;
 class Product{
@@ -108,7 +108,7 @@ class InventoryManager{
     }
 }
 
-class InventoryManagement{
+class InventoryManagementApp{
     public static void main(String[] args) {
         Scanner sc =new Scanner(System.in);
         InventoryManager im = new InventoryManager();
