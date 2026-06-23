@@ -1,0 +1,110 @@
+Exercise 1: Control Structures
+Scenario 1
+DECLARE
+    v_age NUMBER,
+    
+
+BEGIN
+    For c in (
+        SELECT DOB, CustomerID
+        FROM Customers
+    )
+    LOOP
+        v_age = TRUC(MONTHS_BETWEEN(SYSDATE,c.DOB)/12);
+
+        if(v_age>60) then
+            UPDATE Loans 
+            Set interestRate = interestRate-1;
+            where CustomerID = c.CustomerID;
+        END IF;
+    END LOOP;
+    Commit;
+    END;
+    / 
+
+Scenario 2
+
+DECLARE 
+    V_balance NUMBER;
+
+BEGIn
+    FOR c IN (
+        Select balance, CustomerID, IsVIP
+        FROM Customers
+    )
+
+        IF (c.balance>10000) THEN
+            UPDATE Customers
+            SET IsVIP = 'TRUE'
+            WHERE CustomerId = c.CustomerID
+        END IF;
+
+    END LOOP;
+
+    COMMIT;
+    
+END;
+/
+
+
+Scenario 3
+
+DECLARE
+
+BEGIN
+
+FOR c in (
+    SELECT cus.Name,
+    l.LoanId,
+    l.EndDate
+    FROM CUSTOMERS cus
+    JOIN Loans l 
+    ON cus.customerID = l.CustomerID
+    WHERE EndDate<=SYSDATE+30 
+)
+
+LOOP
+    DDMS_OUTPUT.PUT_LINE("Loan amount with ID"||c.loanID||"is due on"||c.EndDate);
+ENDLOOP;
+COMMIT;
+END;
+/
+
+Exercise 3: Stored Procedures
+
+CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest
+IS
+BEGIN
+    FOR c IN(
+    SELECT cus.CustomerID,cus.Balance,cus.LastModified
+    FROM Customers cus
+    JOIN Accounts ac 
+    ON cus.CustomerID = ac.CustomerID
+    WHERE ac.AccountType = 'Savings'
+    )
+    LOOP
+        UPDATE Customers
+        SET Balance = Balance +(Balance*0.01),
+        LastModified = SYSDATE
+        WHERE CustomerID = c.CustomerID;
+    END LOOP;
+COMMIT;
+END;
+/   
+
+Scenario 2
+
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus
+(
+p_bonus NUMBER,
+p_dept VARCHAR2
+)
+IS
+
+BEGIN
+    UPDATE Employees
+    SET Salary = Salary + Salary*(p_bonus/100)
+    WHERE Department = p_dept;
+COMMIT;
+END;
+/
