@@ -108,3 +108,33 @@ BEGIN
 COMMIT;
 END;
 /
+
+Scenario 3
+
+CREATE OR REPLACE PROCEDURE TransferFunds(
+    p_fromAcc NUMBER,
+    p_toAcc NUMBER,
+    p_amount NUMBER
+)
+
+IS
+    v_fromBal NUMBER;
+BEGIN
+    SELECT Balance INTO v_fromBal 
+    FROM Accounts
+    WHERE AccountID = p_fromAcc;
+
+    IF (p_amount<=v_fromBal) THEN
+        UPDATE Accounts
+        SET Balance = Balance - p_amount
+        WHERE AccountID = p_fromAcc;
+
+        UPDATE Accounts
+        SET Balance = Balance + p_amount
+        WHERE AccountID = p_toAcc;
+    END IF;
+
+COMMIT;
+
+END;
+/    
