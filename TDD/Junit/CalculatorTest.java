@@ -27,4 +27,9 @@ public class CalculatorTest {
     void testDivide(){
         assertEquals(2, ca.divide(5,2));
     }
+
+    @Test
+    void divideByZero(){
+        assertThrows(ArithmeticException.class,()->ca.divide(0,0));
+    }
 }
