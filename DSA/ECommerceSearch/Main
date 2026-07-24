@@ -11,7 +11,6 @@ public class Main {
                 new Product(105, "Backpack", "Fashion")
         };
 
-        // ---------- Linear Search ----------
         System.out.println("===== Linear Search =====");
 
         Product result1 = LinearSearch.search(products, 103);
@@ -22,7 +21,6 @@ public class Main {
             System.out.println("Product not found.");
         }
 
-        // ---------- Binary Search ----------
         System.out.println("\n===== Binary Search =====");
 
         Product result2 = BinarySearch.search(products, 104);
