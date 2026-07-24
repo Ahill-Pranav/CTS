@@ -10,11 +10,11 @@ BEGIN
         FROM Customers
     )
     LOOP
-        v_age = TRUC(MONTHS_BETWEEN(SYSDATE,c.DOB)/12);
+        v_age := TRUNC(MONTHS_BETWEEN(SYSDATE, c.DOB) / 12);
 
         if(v_age>60) then
             UPDATE Loans 
-            Set interestRate = interestRate-1;
+            Set interestRate = interestRate-1
             where CustomerID = c.CustomerID;
         END IF;
     END LOOP;
@@ -27,16 +27,17 @@ Scenario 2
 DECLARE 
     V_balance NUMBER;
 
-BEGIn
+BEGIN
     FOR c IN (
         Select balance, CustomerID, IsVIP
         FROM Customers
     )
+    LOOP
 
         IF (c.balance>10000) THEN
             UPDATE Customers
             SET IsVIP = 'TRUE'
-            WHERE CustomerId = c.CustomerID
+            WHERE CustomerId = c.CustomerID;
         END IF;
 
     END LOOP;
@@ -64,8 +65,11 @@ FOR c in (
 )
 
 LOOP
-    DDMS_OUTPUT.PUT_LINE("Loan amount with ID"||c.loanID||"is due on"||c.EndDate);
-ENDLOOP;
+    DBMS_OUTPUT.PUT_LINE(
+    'Loan ID '||c.LoanID||
+    ' is due on '||c.EndDate
+    );
+END LOOP;
 COMMIT;
 END;
 /
