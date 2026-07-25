@@ -1,37 +1,37 @@
-package com.library.springrest.model;
+package com.cognizent.ormlearn.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="country")
 public class Country {
 
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(Country.class);
-
+    @Id
+    @Column(name="co_code")
     private String code;
+
+    @Column(name="co_name")
     private String name;
 
     public Country() {
-        LOGGER.debug("Inside Country Constructor.");
     }
 
     public String getCode() {
-        LOGGER.debug("Inside getCode()");
         return code;
     }
 
     public void setCode(String code) {
-        LOGGER.debug("Inside setCode()");
         this.code = code;
     }
 
     public String getName() {
-        LOGGER.debug("Inside getName()");
         return name;
     }
 
     public void setName(String name) {
-        LOGGER.debug("Inside setName()");
         this.name = name;
     }
 

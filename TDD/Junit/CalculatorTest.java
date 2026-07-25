@@ -5,12 +5,25 @@ public class CalculatorTest {
     Calculator ca;
     @BeforeEach
     public void setup(){
+        // Arrange (Setup method)
         ca = new Calculator();
+    }
+
+    @AfterEach
+    public void tearDown(){
+        // Teardown method
+        ca = null;
     }
 
     @Test
     void testAdd(){
-        assertEquals(6, ca.add(3,3));
+        // Arrange (done in setup)
+        
+        // Act
+        int result = ca.add(3,3);
+        
+        // Assert
+        assertEquals(6, result);
     }
 
     @Test

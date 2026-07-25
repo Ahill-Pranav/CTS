@@ -3,6 +3,24 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/TDD/Junit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/TDD/Mockito" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/TDD/SpringTesting" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring JPA and Hibernate/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-JWT/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-JWT/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task1/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task2/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task3/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task4/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task5/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task5/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task6/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/SpringREST-Task6/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Spring REST/target" />
     </content>
   </component>
 </module>
