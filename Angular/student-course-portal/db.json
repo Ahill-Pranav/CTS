@@ -1,0 +1,57 @@
+{
+  "courses": [
+    {
+      "id": 101,
+      "name": "Angular Architecture & Deep Skilling",
+      "code": "CS-ANG-20",
+      "credits": 4,
+      "gradeStatus": "passed",
+      "enrolled": true,
+      "description": "Master Angular v20 standalone components, routing, NgRx state management, and Jasmine/Karma testing."
+    },
+    {
+      "id": 102,
+      "name": ".NET Full Stack Engineering",
+      "code": "CS-DOT-50",
+      "credits": 3,
+      "gradeStatus": "passed",
+      "enrolled": true,
+      "description": "Build enterprise Web APIs using C#, EF Core, CQRS patterns, and SQL Database design."
+    },
+    {
+      "id": 103,
+      "name": "Cloud Native Microservices",
+      "code": "CS-CLD-30",
+      "credits": 4,
+      "gradeStatus": "pending",
+      "enrolled": false,
+      "description": "Design and deploy scalable containerized services with Docker, Kubernetes, and API Gateways."
+    },
+    {
+      "id": 104,
+      "name": "Data Structures & Algorithmic Thinking",
+      "code": "CS-DSA-10",
+      "credits": 2,
+      "gradeStatus": "passed",
+      "enrolled": true,
+      "description": "Comprehensive study of essential graphs, trees, dynamic programming, and space-time optimization."
+    },
+    {
+      "id": 105,
+      "name": "DevOps Pipelines & CI/CD Security",
+      "code": "CS-DEV-40",
+      "credits": 1,
+      "gradeStatus": "failed",
+      "enrolled": false,
+      "description": "Automated build, test, and release workflows using GitHub Actions, SonarQube, and Terraform."
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Alex Johnson",
+      "email": "alex.johnson@university.edu"
+    }
+  ],
+  "enrollments": []
+}

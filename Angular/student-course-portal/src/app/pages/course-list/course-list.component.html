@@ -1,0 +1,45 @@
+<div class="course-list-page">
+  <div class="page-header card">
+    <h2>Available Academic Courses</h2>
+    <p>Browse course offerings, check grade statuses, and inspect details.</p>
+    <app-notification></app-notification>
+  </div>
+
+  @if (selectedCourseId) {
+    <div class="selection-banner">
+      ✨ <strong>Selected course ID: {{ selectedCourseId }}</strong> - Enrollment requested!
+    </div>
+  }
+
+  <!-- Task 96: Async pipe rendering courses$ Observable from NgRx store -->
+  @if (isLoading$ | async) {
+    <div class="loading-container card">
+      <div class="spinner"></div>
+      <p>Loading course catalog via NgRx Store & HttpClient...</p>
+    </div>
+  } @else {
+    @if ((courses$ | async); as courses) {
+      @if (courses.length > 0) {
+        <div class="courses-grid">
+          <div *ngFor="let c of courses; trackBy: trackByCourseId" (click)="navigateToDetail(c.id)" class="card-wrapper">
+            <app-course-card
+              [course]="c"
+              (enrollRequested)="onEnroll($event)"
+            ></app-course-card>
+          </div>
+        </div>
+      } @else {
+        <ng-template #noCourses>
+          <div class="empty-state card">
+            <span class="empty-icon">📂</span>
+            <p>No courses available at this time.</p>
+          </div>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="noCourses"></ng-container>
+      }
+    }
+  }
+
+  <!-- Task 62: CourseSummaryWidgetComponent integration -->
+  <app-course-summary-widget></app-course-summary-widget>
+</div>

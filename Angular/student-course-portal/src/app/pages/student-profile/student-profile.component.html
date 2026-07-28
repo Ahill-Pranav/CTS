@@ -1,0 +1,50 @@
+<div class="profile-container">
+  <div class="profile-card card">
+    <div class="profile-header">
+      <div class="avatar">👨‍🎓</div>
+      <div class="header-info">
+        <h2>{{ student.name }}</h2>
+        <p class="email">{{ student.email }}</p>
+        <span class="badge badge-passed">ID: {{ student.studentId }}</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="profile-details-grid">
+      <div class="detail-item">
+        <span class="label">Major Program</span>
+        <span class="value">{{ student.major }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Current Semester</span>
+        <span class="value">{{ student.semester }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Cumulative GPA</span>
+        <span class="value highlight-val">{{ student.gpa }} / 4.0</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Completed Credits</span>
+        <span class="value">{{ student.completedCredits }} Credits</span>
+      </div>
+    </div>
+
+    <!-- Task 66: Display enrolled courses from EnrollmentService -->
+    <hr class="divider" />
+    <h3>Enrolled Courses</h3>
+    @if (enrolledCourses.length > 0) {
+      <ul class="enrolled-list">
+        @for (c of enrolledCourses; track c.id) {
+          <li class="enrolled-item">
+            <span class="enrolled-code">{{ c.code }}</span>
+            <span class="enrolled-name">{{ c.name }}</span>
+            <span class="enrolled-credits">{{ c.credits | creditLabel }}</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="no-enrollment">No courses currently enrolled. <a routerLink="/courses">Browse courses</a>.</p>
+    }
+  </div>
+</div>

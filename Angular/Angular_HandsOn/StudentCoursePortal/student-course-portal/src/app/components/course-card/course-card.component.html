@@ -1,0 +1,54 @@
+<!-- Task 34 & 37: Custom highlight directive with configurable input color -->
+<!-- Task 29: [ngClass] object binding via getter -->
+<!-- Task 30: [ngStyle] dynamic left border color -->
+<div
+  class="course-card card"
+  [appHighlight]="'rgba(99, 102, 241, 0.15)'"
+  [ngClass]="cardClasses"
+  [ngStyle]="cardStyle"
+>
+  <div class="card-header">
+    <span class="course-code">{{ course.code }}</span>
+
+    <!-- Task 27: Structural directive ngSwitch for grade badges -->
+    <ng-container [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" class="badge badge-passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge-failed">Failed</span>
+      <span *ngSwitchCase="'pending'" class="badge badge-pending">Pending</span>
+      <span *ngSwitchDefault class="badge badge-pending">Unknown</span>
+    </ng-container>
+  </div>
+
+  <h3 class="course-title">{{ course.name }}</h3>
+
+  <!-- Task 36: Custom pipe usage {{ course.credits | creditLabel }} -->
+  <div class="course-meta">
+    <span class="credits-badge">🏷️ {{ course.credits | creditLabel }}</span>
+    <span *ngIf="course.enrolled" class="enrolled-indicator">Enrolled</span>
+  </div>
+
+  <!-- Task 31: Dynamic details toggle -->
+  @if (isExpanded) {
+    <div class="course-details">
+      <p>{{ course.description || 'Comprehensive curriculum covering practical implementation and core principles.' }}</p>
+      <div class="extra-info">
+        <span>Course ID: #{{ course.id }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="card-actions">
+    <button class="btn btn-secondary btn-sm" (click)="toggleDetails()">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+
+    <!-- Task 21: EventEmitter trigger on Enroll click -->
+    <button
+      class="btn btn-primary btn-sm"
+      [disabled]="course.enrolled"
+      (click)="onEnroll()"
+    >
+      {{ course.enrolled ? 'Enrolled' : 'Enroll' }}
+    </button>
+  </div>
+</div>

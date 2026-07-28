@@ -1,0 +1,21 @@
+.not-found-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.not-found-container h1 {
+  font-size: 5rem;
+  color: #ef4444;
+  margin-bottom: 0.5rem;
+}
+
+.not-found-container h2 {
+  margin-bottom: 1rem;
+}
+
+.not-found-container p {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}

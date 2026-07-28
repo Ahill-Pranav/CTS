@@ -1,0 +1,141 @@
+<div class="form-page-container">
+  <div class="form-card card">
+    <h2>Reactive Student Enrollment Form</h2>
+    <p class="form-subtitle">FormBuilder-powered reactive form with custom synchronous & asynchronous validators and dynamic FormArray controls.</p>
+
+    @if (isSubmitted) {
+      <div class="success-banner card">
+        <span class="success-icon">⚡</span>
+        <div>
+          <h4>Reactive Enrollment Request Submitted!</h4>
+          <p>Logged student <strong>{{ submittedData?.studentName }}</strong> (Course ID: #{{ submittedData?.courseId }}).</p>
+          @if (submittedData?.additionalCourses?.length > 0) {
+            <p>Additional courses: {{ submittedData?.additionalCourses?.join(', ') }}</p>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Task 50: [formGroup]="enrollForm" binding -->
+    <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()" class="enrollment-form" novalidate>
+      
+      <!-- Field 1: Student Name -->
+      <div class="form-group">
+        <label for="studentName">Student Name *</label>
+        <input
+          type="text"
+          id="studentName"
+          formControlName="studentName"
+          class="form-control"
+          placeholder="Enter full name"
+        />
+        @if (enrollForm.get('studentName')?.touched && enrollForm.get('studentName')?.errors?.['required']) {
+          <span class="error-text">Student name is required.</span>
+        }
+        @if (enrollForm.get('studentName')?.touched && enrollForm.get('studentName')?.errors?.['minlength']) {
+          <span class="error-text">Name must be at least 3 characters.</span>
+        }
+      </div>
+
+      <!-- Field 2: Student Email with Async Validator -->
+      <div class="form-group">
+        <label for="studentEmail">Student Email (Async Validation) *</label>
+        <input
+          type="email"
+          id="studentEmail"
+          formControlName="studentEmail"
+          class="form-control"
+          placeholder="student@university.edu"
+        />
+        @if (enrollForm.get('studentEmail')?.pending) {
+          <span class="info-text">Checking email availability...</span>
+        }
+        @if (enrollForm.get('studentEmail')?.touched && enrollForm.get('studentEmail')?.errors?.['required']) {
+          <span class="error-text">Email address is required.</span>
+        }
+        @if (enrollForm.get('studentEmail')?.touched && enrollForm.get('studentEmail')?.errors?.['email']) {
+          <span class="error-text">Invalid email address format.</span>
+        }
+        <!-- Task 55: Async validator error -->
+        @if (enrollForm.get('studentEmail')?.touched && enrollForm.get('studentEmail')?.errors?.['emailTaken']) {
+          <span class="error-text">Email test@ is already taken.</span>
+        }
+      </div>
+
+      <!-- Field 3: Course ID with Custom Sync Validator -->
+      <div class="form-group">
+        <label for="courseId">Course ID / Code *</label>
+        <input
+          type="text"
+          id="courseId"
+          formControlName="courseId"
+          class="form-control"
+          placeholder="e.g. 101 or CS101"
+        />
+        @if (enrollForm.get('courseId')?.touched && enrollForm.get('courseId')?.errors?.['required']) {
+          <span class="error-text">Course ID is required.</span>
+        }
+        <!-- Task 54: Custom synchronous validator error -->
+        @if (enrollForm.get('courseId')?.touched && enrollForm.get('courseId')?.errors?.['noCourseCode']) {
+          <span class="error-text">Course code starting with XX is not allowed.</span>
+        }
+      </div>
+
+      <!-- Field 4: Preferred Semester -->
+      <div class="form-group">
+        <label for="preferredSemester">Preferred Semester</label>
+        <select id="preferredSemester" formControlName="preferredSemester" class="form-control">
+          <option value="Odd">Odd Semester</option>
+          <option value="Even">Even Semester</option>
+        </select>
+      </div>
+
+      <!-- Task 56: FormArray Dynamic Controls -->
+      <div class="form-group dynamic-section card">
+        <div class="dynamic-header">
+          <label>Additional Courses (Dynamic FormArray)</label>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="addCourseControl()">
+            + Add Another Course
+          </button>
+        </div>
+
+        <div formArrayName="additionalCourses" class="dynamic-list">
+          @for (ctrl of additionalCourses.controls; track $index; let i = $index) {
+            <div class="dynamic-input-row">
+              <input
+                type="text"
+                [formControlName]="i"
+                class="form-control"
+                placeholder="Additional course code/name"
+              />
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeCourse(i)">
+                Remove
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="agreeToTerms" />
+          I confirm academic prerequisite validation. *
+        </label>
+        @if (enrollForm.get('agreeToTerms')?.touched && enrollForm.get('agreeToTerms')?.errors?.['requiredTrue']) {
+          <span class="error-text">You must accept the terms.</span>
+        }
+      </div>
+
+      <!-- Task 51: Action buttons with disabled state -->
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">
+          Reset
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="enrollForm.invalid">
+          Submit Reactive Form
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

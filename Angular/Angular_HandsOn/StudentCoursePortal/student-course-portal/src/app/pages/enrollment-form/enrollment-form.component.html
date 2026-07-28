@@ -1,0 +1,143 @@
+<div class="form-page-container">
+  <div class="form-card card">
+    <h2>Student Course Enrollment Request</h2>
+    <p class="form-subtitle">Fill out the template-driven form below to request course enrollment.</p>
+
+    <!-- Task 46: Success alert banner -->
+    @if (isSubmitted) {
+      <div class="success-banner card">
+        <span class="success-icon">🎉</span>
+        <div>
+          <h4>Enrollment request submitted successfully!</h4>
+          <p>Request logged for student <strong>{{ submittedData?.studentName }}</strong> (Course ID: #{{ submittedData?.courseId }}).</p>
+        </div>
+      </div>
+    }
+
+    <!-- Task 39: Template-driven form with #enrollForm reference variable -->
+    <form #enrollForm="ngForm" (ngSubmit)="onSubmit(enrollForm)" class="enrollment-form" novalidate>
+      
+      <!-- Field 1: Student Name -->
+      <div class="form-group">
+        <label for="studentName">Student Name *</label>
+        <!-- Task 43: required & minlength="3" -->
+        <input
+          type="text"
+          id="studentName"
+          name="studentName"
+          class="form-control"
+          placeholder="Enter your full name"
+          [(ngModel)]="formData.studentName"
+          #nameCtrl="ngModel"
+          required
+          minlength="3"
+        />
+        <!-- Task 44: Contextual error messages for studentName -->
+        @if (nameCtrl.touched && nameCtrl.errors?.['required']) {
+          <span class="error-text">Name is required.</span>
+        }
+        @if (nameCtrl.touched && nameCtrl.errors?.['minlength']) {
+          <span class="error-text">Name must be at least 3 characters long.</span>
+        }
+      </div>
+
+      <!-- Field 2: Student Email -->
+      <div class="form-group">
+        <label for="studentEmail">Student Email *</label>
+        <!-- Task 43: required & email -->
+        <input
+          type="email"
+          id="studentEmail"
+          name="studentEmail"
+          class="form-control"
+          placeholder="student@university.edu"
+          [(ngModel)]="formData.studentEmail"
+          #emailCtrl="ngModel"
+          required
+          email
+        />
+        <!-- Task 44: Contextual error messages for studentEmail -->
+        @if (emailCtrl.touched && emailCtrl.errors?.['required']) {
+          <span class="error-text">Email address is required.</span>
+        }
+        @if (emailCtrl.touched && emailCtrl.errors?.['email']) {
+          <span class="error-text">Please enter a valid email address format.</span>
+        }
+      </div>
+
+      <!-- Field 3: Course ID -->
+      <div class="form-group">
+        <label for="courseId">Course ID *</label>
+        <!-- Task 43: required -->
+        <input
+          type="number"
+          id="courseId"
+          name="courseId"
+          class="form-control"
+          placeholder="e.g. 101"
+          [(ngModel)]="formData.courseId"
+          #courseCtrl="ngModel"
+          required
+        />
+        <!-- Task 44: Contextual error message for courseId -->
+        @if (courseCtrl.touched && courseCtrl.errors?.['required']) {
+          <span class="error-text">Course ID is required.</span>
+        }
+      </div>
+
+      <!-- Field 4: Preferred Semester -->
+      <div class="form-group">
+        <label for="preferredSemester">Preferred Semester</label>
+        <select
+          id="preferredSemester"
+          name="preferredSemester"
+          class="form-control"
+          [(ngModel)]="formData.preferredSemester"
+        >
+          <option value="Odd">Odd Semester (Fall / Spring)</option>
+          <option value="Even">Even Semester (Winter / Summer)</option>
+        </select>
+      </div>
+
+      <!-- Field 5: Agree to Terms Checkbox -->
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            id="agreeToTerms"
+            name="agreeToTerms"
+            [(ngModel)]="formData.agreeToTerms"
+            #termsCtrl="ngModel"
+            required
+          />
+          I agree to academic enrollment terms and prerequisite validation. *
+        </label>
+        <!-- Task 44: Error message for agreeToTerms -->
+        @if (termsCtrl.touched && termsCtrl.errors?.['required']) {
+          <span class="error-text">You must agree to the enrollment terms.</span>
+        }
+      </div>
+
+      <!-- Task 41 & 47: Action buttons -->
+      <div class="form-actions">
+        <!-- Task 47: Reset button -->
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onReset(enrollForm)"
+        >
+          Reset Form
+        </button>
+
+        <!-- Task 41: Submit button disabled when form is invalid -->
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="enrollForm.invalid"
+        >
+          Submit Request
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

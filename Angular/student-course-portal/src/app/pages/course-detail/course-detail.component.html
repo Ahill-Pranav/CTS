@@ -1,0 +1,38 @@
+<div class="detail-container">
+  @if (course) {
+    <div class="detail-card card">
+      <div class="header">
+        <a routerLink="/courses" class="back-link">&larr; Back to Courses</a>
+        <span class="badge badge-passed">ID: #{{ course.id }}</span>
+      </div>
+
+      <div class="title-row">
+        <h2>{{ course.name }}</h2>
+        <span class="course-code-badge">{{ course.code }}</span>
+      </div>
+
+      <div class="meta-row">
+        <span class="credits">🏷️ {{ course.credits | creditLabel }}</span>
+        <span class="status-badge" [ngClass]="'badge-' + course.gradeStatus">
+          Status: {{ course.gradeStatus | titlecase }}
+        </span>
+      </div>
+
+      <hr class="divider" />
+
+      <p class="description">{{ course.description }}</p>
+
+      <div class="actions">
+        <button class="btn btn-primary" (click)="toggleEnrollment()">
+          {{ isEnrolled ? 'Unenroll' : 'Enroll in Course' }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="not-found-card card">
+      <h3>Course Not Found</h3>
+      <p>The requested course ID could not be loaded.</p>
+      <a routerLink="/courses" class="btn btn-secondary">Return to Catalog</a>
+    </div>
+  }
+</div>

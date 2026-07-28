@@ -1,0 +1,7 @@
+.notification-box {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}

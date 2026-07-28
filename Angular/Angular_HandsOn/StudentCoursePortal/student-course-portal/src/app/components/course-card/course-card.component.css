@@ -1,0 +1,103 @@
+.course-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-code {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #a855f7;
+  letter-spacing: 0.05em;
+  background: rgba(168, 85, 247, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.course-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.credits-badge {
+  font-size: 0.9rem;
+  color: #38bdf8;
+}
+
+.enrolled-indicator {
+  font-size: 0.8rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+.course-details {
+  background: rgba(15, 23, 42, 0.5);
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  border-left: 2px solid #6366f1;
+}
+
+.extra-info {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* Task 29: Dynamic attribute directive class styles */
+.card--enrolled {
+  background: rgba(16, 185, 129, 0.08) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.card--full {
+  position: relative;
+}
+
+.card--full::after {
+  content: "High Credit";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.65rem;
+  background: #f59e0b;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* Task 31: Expanded class modifier */
+.expanded {
+  border-color: #6366f1;
+}

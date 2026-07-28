@@ -1,0 +1,58 @@
+<div class="home-container">
+  <!-- Task 11: String interpolation -->
+  <section class="hero-section card">
+    <h1>Welcome to {{ portalName }}</h1>
+    <p class="description">
+      Empowering students with dynamic course discovery, real-time academic progress tracking, and effortless enrollment management.
+    </p>
+
+    <!-- Task 12 & 13: Property binding and Event binding -->
+    <div class="hero-actions">
+      <button class="btn btn-primary" [disabled]="!isPortalActive" (click)="onEnrollClick()">
+        Enroll Now
+      </button>
+      <a routerLink="/courses" class="btn btn-secondary">Browse Courses</a>
+    </div>
+
+    @if (message) {
+      <div class="enrollment-alert">
+        ⚡ {{ message }} <a routerLink="/enroll" class="alert-link">Go to Enrollment Form &rarr;</a>
+      </div>
+    }
+  </section>
+
+  <!-- Task 8: Hardcoded stats row -->
+  <section class="stats-row">
+    <div class="stat-card card">
+      <span class="stat-icon">📚</span>
+      <div class="stat-number">12</div>
+      <div class="stat-label">Courses Available</div>
+    </div>
+    <div class="stat-card card">
+      <span class="stat-icon">✅</span>
+      <div class="stat-number">3</div>
+      <div class="stat-label">Enrolled</div>
+    </div>
+    <div class="stat-card card">
+      <span class="stat-icon">⭐</span>
+      <div class="stat-number">3.8</div>
+      <div class="stat-label">GPA</div>
+    </div>
+  </section>
+
+  <!-- Task 14: Two-way binding with ngModel -->
+  <section class="search-section card">
+    <h3>Quick Course Search</h3>
+    <div class="input-group">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Type to search courses..."
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+    <p class="search-feedback">
+      Searching for: <strong>{{ searchTerm }}</strong>
+    </p>
+  </section>
+</div>

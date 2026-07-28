@@ -1,0 +1,41 @@
+================================================================================
+Student Course Portal - Angular Workspace Architecture Notes
+================================================================================
+
+1. angular.json
+   - Purpose: Main Angular CLI configuration file that defines project structure, build/serve configurations, asset directories, styles, and build budget limits for environments.
+
+2. tsconfig.json
+   - Purpose: Root TypeScript compiler configuration file containing base settings, target ES versions, module resolution rules, and strict type checking options for the entire workspace.
+
+3. tsconfig.app.json
+   - Purpose: Application-specific TypeScript configuration that inherits from tsconfig.json and specifies compiler options and files specifically for compiling the Angular application.
+
+4. package.json
+   - Purpose: Defines project npm metadata, dependencies (@angular/core, rxjs, etc.), devDependencies (@angular/cli, typescript, etc.), and executable npm script commands.
+
+5. src/main.ts
+   - Purpose: Main entry point of the Angular application that initializes and bootstraps the root standalone component (AppComponent) using bootstrapApplication and app.config.ts.
+
+6. src/app/app.config.ts (Standalone equivalent of app.module.ts)
+   - Purpose: Configures root application providers, dependency injection rules, and routing services (provideZoneChangeDetection, provideRouter) for Angular standalone API mode.
+
+7. src/app/app.ts (or app.component.ts)
+   - Purpose: Root Angular component TypeScript class that defines the root view container, component selector ('app-root'), imported modules/directives, template, and styles.
+
+8. src/index.html
+   - Purpose: The single host HTML page for the Single Page Application (SPA) containing the root HTML shell and the <app-root> container element where Angular renders dynamic views.
+
+================================================================================
+Production Budget Configuration (angular.json: architect > build > configurations > production)
+================================================================================
+
+1. Initial Bundle Budget:
+   - maximumWarning: 500kB
+   - maximumError: 1MB
+   - Controls: Thresholds for the combined size of the application's initial bundle (JS/CSS loaded at startup). If total initial code exceeds 500kB, build issues a warning; if it exceeds 1MB, build fails with an error to prevent oversized deployment bundles.
+
+2. Component Style Budget:
+   - maximumWarning: 4kB
+   - maximumError: 8kB
+   - Controls: Thresholds for individual component stylesheet sizes. If any single component CSS file exceeds 4kB, CLI issues a warning; if it exceeds 8kB, CLI triggers a build failure to enforce modular CSS optimization.

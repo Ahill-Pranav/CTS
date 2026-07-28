@@ -1,0 +1,48 @@
+<div
+  class="course-card card"
+  [appHighlight]="'rgba(99, 102, 241, 0.15)'"
+  [ngClass]="cardClasses"
+  [ngStyle]="cardStyle"
+>
+  <div class="card-header">
+    <span class="course-code">{{ course.code }}</span>
+
+    <ng-container [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" class="badge badge-passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge-failed">Failed</span>
+      <span *ngSwitchCase="'pending'" class="badge badge-pending">Pending</span>
+      <span *ngSwitchDefault class="badge badge-pending">Unknown</span>
+    </ng-container>
+  </div>
+
+  <h3 class="course-title">{{ course.name }}</h3>
+
+  <div class="course-meta">
+    <span class="credits-badge">🏷️ {{ course.credits | creditLabel }}</span>
+    <span *ngIf="isEnrolled || course.enrolled" class="enrolled-indicator">Enrolled</span>
+  </div>
+
+  @if (isExpanded) {
+    <div class="course-details">
+      <p>{{ course.description || 'Comprehensive curriculum covering practical implementation and core principles.' }}</p>
+      <div class="extra-info">
+        <span>Course ID: #{{ course.id }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="card-actions">
+    <button class="btn btn-secondary btn-sm" (click)="$event.stopPropagation(); toggleDetails()">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+
+    <!-- Task 65 & 100: Toggles label between Enroll and Unenroll -->
+    <button
+      class="btn btn-sm"
+      [ngClass]="isEnrolled ? 'btn-danger' : 'btn-primary'"
+      (click)="onEnroll($event)"
+    >
+      {{ isEnrolled ? 'Unenroll' : 'Enroll' }}
+    </button>
+  </div>
+</div>

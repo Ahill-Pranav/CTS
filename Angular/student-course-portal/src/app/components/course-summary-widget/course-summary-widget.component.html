@@ -1,0 +1,9 @@
+<div class="summary-widget card">
+  <h4>📊 Shared Course Summary Widget</h4>
+  <p>Live Course Count: <strong>{{ totalCoursesCount }}</strong></p>
+  <ul class="mini-course-list">
+    <li *ngFor="let c of courses">
+      {{ c.code }}: {{ c.name }} ({{ c.credits }} Credits)
+    </li>
+  </ul>
+</div>
